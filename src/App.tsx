@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import MovieList from './components/MovieList';
 import MovieFilters from './components/MovieFilters';
+import BackgroundAnimation from './components/BackgroundAnimation';
+import ThemeToggle from './components/ThemeToggle';
 import './App.css';
 
 function App() {
@@ -16,10 +18,19 @@ function App() {
 
   return (
     <div className="App">
+      <BackgroundAnimation />
+      <ThemeToggle />
+      
       <header className="App-header">
-        <h1>Random Movie Browser</h1>
-        <p>Discover movies and review them on Letterboxd</p>
+        <div className="header-content">
+          <h1 className="gradient-text">Random Movie Browser</h1>
+          <p className="subtitle">
+            Discover movies <br className="md:inline" />
+            & review them on <span className="letterboxd-text">Letterboxd</span>
+          </p>
+        </div>
       </header>
+      
       <main>
         <div className="container">
           <MovieFilters onFiltersChange={handleFiltersChange} />

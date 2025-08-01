@@ -4,15 +4,22 @@
 
 .movie-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 25px;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 30px;
   padding: 20px 0;
+}
+
+@media (max-width: 1024px) {
+  .movie-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 25px;
+  }
 }
 
 @media (max-width: 768px) {
   .movie-grid {
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 15px;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 20px;
     padding: 15px 0;
   }
 }
@@ -20,7 +27,7 @@
 @media (max-width: 480px) {
   .movie-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
+    gap: 15px;
     padding: 10px 0;
   }
 }
@@ -30,18 +37,19 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 40px 20px;
-  color: #cccccc;
+  padding: 60px 20px;
+  color: var(--color-text-muted);
+  font-family: var(--font-sans);
 }
 
 .loading-spinner {
-  width: 40px;
-  height: 40px;
-  border: 3px solid #333333;
-  border-top: 3px solid #ff6b35;
+  width: 50px;
+  height: 50px;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  border-top: 3px solid #ff8a70;
   border-radius: 50%;
-  animation: spin 1s linear infinite;
-  margin-bottom: 15px;
+  animation: spin 1.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  margin-bottom: 20px;
 }
 
 @keyframes spin {
@@ -49,52 +57,128 @@
   100% { transform: rotate(360deg); }
 }
 
+.loading-container p {
+  font-size: 1rem;
+  font-weight: 500;
+  margin: 0;
+  opacity: 0.8;
+}
+
 .error-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 40px 20px;
-  color: #ff6b6b;
+  padding: 60px 20px;
   text-align: center;
 }
 
 .error-message {
-  font-size: 1.1rem;
-  margin-bottom: 20px;
+  font-size: 1.2rem;
+  margin-bottom: 24px;
+  color: #ff8a70;
+  font-weight: 500;
+  font-family: var(--font-sans);
 }
 
 .retry-button,
 .load-more-button {
-  background: linear-gradient(135deg, #ff6b35, #f7931e);
+  background: linear-gradient(135deg, #ff8a70, #7cffeb);
   color: white;
   border: none;
-  padding: 12px 24px;
-  border-radius: 25px;
+  padding: 14px 28px;
+  border-radius: 16px;
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.8px;
+  font-family: var(--font-sans);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.retry-button::before,
+.load-more-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.6s ease;
+}
+
+.retry-button:hover::before,
+.load-more-button:hover::before {
+  left: 100%;
 }
 
 .retry-button:hover,
 .load-more-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(255, 107, 53, 0.4);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(255, 138, 112, 0.3);
+  background: linear-gradient(135deg, #7cffeb, #ff8a70);
+}
+
+.retry-button:active,
+.load-more-button:active {
+  transform: translateY(-1px);
 }
 
 .load-more-container {
   display: flex;
   justify-content: center;
-  padding: 30px 20px;
+  padding: 40px 20px;
 }
 
 .empty-state {
   text-align: center;
-  color: #999999;
-  padding: 60px 20px;
-  font-size: 1.1rem;
+  color: var(--color-text-muted);
+  padding: 80px 20px;
+  font-size: 1.2rem;
   line-height: 1.6;
+  font-family: var(--font-sans);
+  font-weight: 400;
+}
+
+.empty-state p {
+  margin: 0 0 12px 0;
+}
+
+.empty-state p:last-child {
+  margin-bottom: 0;
+  opacity: 0.8;
+}
+
+/* Dark mode adjustments */
+.dark .loading-spinner {
+  border-color: rgba(0, 0, 0, 0.3);
+  border-top-color: #ff8a70;
+}
+
+/* Responsive adjustments for buttons */
+@media (max-width: 768px) {
+  .retry-button,
+  .load-more-button {
+    padding: 12px 24px;
+    font-size: 0.9rem;
+  }
+  
+  .loading-container {
+    padding: 50px 20px;
+  }
+  
+  .error-container {
+    padding: 50px 20px;
+  }
+  
+  .empty-state {
+    padding: 60px 20px;
+    font-size: 1.1rem;
+  }
 }

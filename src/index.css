@@ -1,19 +1,126 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: #1a1a1a;
-  color: #ffffff;
+/* Import Geist fonts */
+@import '@fontsource/geist-sans/400.css';
+@import '@fontsource/geist-sans/500.css';
+@import '@fontsource/geist-sans/600.css';
+@import '@fontsource/geist-sans/700.css';
+@import '@fontsource/geist-mono/400.css';
+@import '@fontsource/geist-mono/500.css';
+
+:root {
+  --font-sans: 'Geist Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-serif: 'Geist Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-heading: 'Geist Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'Geist Mono', ui-monospace, Menlo, Monaco, monospace;
+
+  --color-primary: #ffffff;
+  --color-secondary: #adadad;
+  --color-accent: #e3e3e3;
+
+  --color-text-heading: #000000;
+  --color-text-default: #000000;
+  --color-text-muted: rgba(0, 0, 0, 0.66);
+  --color-bg-page: #e3e3e3;
+  --color-bg-page-dark: #030606;
+
+  ::selection {
+    background-color: #adadad;
+  }
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.dark {
+  --color-primary: #ffffff;
+  --color-secondary: #adadad;
+  --color-accent: #2d2d2d;
+
+  --color-text-heading: #ffffff;
+  --color-text-default: #ffffff;
+  --color-text-muted: rgba(227, 227, 227, 0.66);
+  --color-bg-page: #030606;
+
+  ::selection {
+    background-color: #2d2d2d;
+    color: #ffffff;
+  }
 }
 
 * {
+  margin: 0;
+  padding: 0;
+  position: relative;
   box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: var(--color-bg-page);
+  color: var(--color-text-default);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+code {
+  font-family: var(--font-mono);
+}
+
+/* Custom scrollbar styling to match your website */
+::-webkit-scrollbar {
+  width: 8px;
+  background-color: transparent;
+  transition: background-color 0.3s ease;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(173, 173, 173, 0.5);
+  border-radius: 10px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+  transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(227, 227, 227, 0.7);
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: var(--color-primary);
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-button {
+  display: none;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(45, 45, 45, 0.7);
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(173, 173, 173, 0.5);
+  background-clip: content-box;
+}
+
+.dark ::-webkit-scrollbar-thumb:active {
+  background: var(--color-primary);
+  background-clip: content-box;
+}
+
+/* Firefox scrollbar compatibility */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(173, 173, 173, 0.5) transparent;
+}
+
+.dark * {
+  scrollbar-color: rgba(45, 45, 45, 0.7) transparent;
 }

@@ -1,0 +1,94 @@
+.bokeh {
+  opacity: 0.4;
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  filter: blur(100px);
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform;
+  z-index: -1;
+}
+
+.bokeh svg {
+  width: 100%;
+  height: 100%;
+}
+
+.bokeh circle {
+  animation: rotate 30s linear infinite;
+  fill: #000000;
+  opacity: 0.43;
+  transform-origin: 50%;
+  will-change: transform;
+  animation-delay: var(--random-delay, 0s);
+  transform: rotate(var(--start-rotation, 0deg));
+}
+
+.bokeh circle:nth-child(2n) {
+  fill: #c7725c;
+  transform-origin: 20% 110%;
+  animation-duration: 20.658s;
+  opacity: 0.2;
+}
+
+.bokeh circle:nth-child(3n) {
+  opacity: 0.65;
+  fill: #769691;
+  transform-origin: 70% 30%;
+  animation-duration: 40s;
+}
+
+.bokeh circle:nth-child(4n) {
+  fill: #c1a985;
+  transform-origin: 110% 70%;
+  animation-duration: 23.8998s;
+}
+
+.bokeh circle:nth-child(5n) {
+  fill: #1c3a31;
+  transform-origin: 30% 40%;
+}
+
+.bokeh circle:nth-child(6n) {
+  fill: #000000;
+  transform-origin: -10% 80%;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(var(--start-rotation, 0deg));
+  }
+  100% {
+    transform: rotate(calc(var(--start-rotation, 0deg) + 360deg));
+  }
+}
+
+/* Dark mode adjustments */
+.dark .bokeh circle {
+  fill: #ffffff;
+}
+
+.dark .bokeh circle:nth-child(2n) {
+  fill: #c7725c;
+}
+
+.dark .bokeh circle:nth-child(3n) {
+  fill: #769691;
+}
+
+.dark .bokeh circle:nth-child(4n) {
+  fill: #c1a985;
+}
+
+.dark .bokeh circle:nth-child(5n) {
+  fill: #1c3a31;
+}
+
+.dark .bokeh circle:nth-child(6n) {
+  fill: #ffffff;
+}
