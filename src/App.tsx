@@ -27,8 +27,8 @@ function App() {
         <div className="header-content">
           <h1 className="gradient-text">Random Movie Browser</h1>
           <p className="subtitle">
-            Discover movies <br className="md:inline" />
-            & review them on <span className="letterboxd-text">Letterboxd</span>
+            Find movies you may have <br className="md:inline" />
+            forgotten you've watched
           </p>
         </div>
       </header>

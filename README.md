@@ -1,11 +1,16 @@
 # Random Movie Browser
 
-A React app that lets you discover random movies and review them on Letterboxd! 🎬
+Browse random movies to find ones you may have forgotten you've watched. Perfect for rediscovering old favorites and adding them to your Letterboxd collection.
+
+## 🚀 Live Demo
+
+**[Try it now!](https://random-movie-letterboxd-review.netlify.app/)**
 
 ## Features
 
-- **Browse Movies**: Discover popular movies with beautiful poster displays
-- **Smart Filters**: Filter by genre, release year, and sorting options
+- **Random Browsing**: Browse through thousands of movies with beautiful poster displays
+- **Smart Filters**: Filter by release year and genre to narrow your search
+- **Multiple Sorting**: Random, popularity, rating, or release date sorting options
 - **Letterboxd Integration**: Click any movie to open its Letterboxd page for reviews
 - **Responsive Design**: Works perfectly on desktop, tablet, and mobile
 - **Infinite Scroll**: Load more movies as you browse
@@ -40,13 +45,13 @@ A React app that lets you discover random movies and review them on Letterboxd! 
 
 ## Usage
 
-1. **Browse Movies**: The app loads popular movies by default
-2. **Use Filters**: Click the "🔍 Filters" button to filter by:
-   - Genre (Action, Comedy, Drama, etc.)
-   - Release Year (1950 to present)
-   - Sort order (Popularity, Rating, Release Date)
+1. **Browse Movies**: The app loads random movies by default
+2. **Use Filters**: Filter by:
+   - **Genre**: Action, Comedy, Drama, etc.
+   - **Release Year**: 1950 to present
+   - **Sort By**: Random, Popularity, Rating, or Release Date
 3. **Visit Letterboxd**: Click any movie poster to open its Letterboxd page
-4. **Load More**: Scroll down or click "Load More Movies" for additional results
+4. **Load More**: Scroll down for more movies with infinite scroll
 
 ## API
 
