@@ -29,6 +29,12 @@ main {
   padding-bottom: 40px;
 }
 
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
 @media (max-width: 768px) {
   .App-header {
     padding: 30px 15px;
