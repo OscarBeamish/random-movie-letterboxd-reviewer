@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Genre } from '../types/Movie';
 import { movieService } from '../services/movieService';
+import SearchIcon from '@mui/icons-material/Search';
 import './MovieFilters.css';
 
 interface MovieFiltersProps {
@@ -15,8 +16,7 @@ const MovieFilters: React.FC<MovieFiltersProps> = ({ onFiltersChange }) => {
   const [genres, setGenres] = useState<Genre[]>([]);
   const [selectedGenre, setSelectedGenre] = useState<number | undefined>();
   const [selectedYear, setSelectedYear] = useState<number | undefined>();
-  const [selectedSort, setSelectedSort] = useState<string>('popularity.desc');
-  const [isOpen, setIsOpen] = useState(false);
+  const [selectedSort, setSelectedSort] = useState<string>('random');
 
   useEffect(() => {
     const loadGenres = async () => {
@@ -56,7 +56,7 @@ const MovieFilters: React.FC<MovieFiltersProps> = ({ onFiltersChange }) => {
   const clearFilters = () => {
     setSelectedGenre(undefined);
     setSelectedYear(undefined);
-    setSelectedSort('popularity.desc');
+    setSelectedSort('random');
   };
 
   const generateYearOptions = () => {
@@ -69,6 +69,7 @@ const MovieFilters: React.FC<MovieFiltersProps> = ({ onFiltersChange }) => {
   };
 
   const sortOptions = [
+    { value: 'random', label: 'Random' },
     { value: 'popularity.desc', label: 'Most Popular' },
     { value: 'popularity.asc', label: 'Least Popular' },
     { value: 'release_date.desc', label: 'Newest First' },
@@ -80,14 +81,7 @@ const MovieFilters: React.FC<MovieFiltersProps> = ({ onFiltersChange }) => {
 
   return (
     <div className="movie-filters">
-      <button 
-        className="filters-toggle"
-        onClick={() => setIsOpen(!isOpen)}
-      >
-        🔍 Filters {(selectedGenre || selectedYear || selectedSort !== 'popularity.desc') && '(Active)'}
-      </button>
-      
-      <div className={`filters-content ${isOpen ? 'open' : ''}`}>
+      <div className="filters-container">
         <div className="filters-grid">
           <div className="filter-group">
             <label htmlFor="genre-select">Genre</label>
@@ -140,9 +134,9 @@ const MovieFilters: React.FC<MovieFiltersProps> = ({ onFiltersChange }) => {
             <button 
               className="clear-filters-btn"
               onClick={clearFilters}
-              disabled={!selectedGenre && !selectedYear && selectedSort === 'popularity.desc'}
+              disabled={!selectedGenre && !selectedYear && selectedSort === 'random'}
             >
-              Clear All
+              Clear
             </button>
           </div>
         </div>

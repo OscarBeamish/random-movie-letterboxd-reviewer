@@ -2,7 +2,6 @@
   min-height: 100vh;
   background: var(--color-bg-page);
   color: var(--color-text-default);
-  transition: all 0.3s ease;
 }
 
 .App-header {
@@ -18,32 +17,13 @@
 }
 
 .gradient-text {
-  background: linear-gradient(
-    120deg,
-    #ff8a70 0%,
-    #7cffeb 25%,
-    #ffd6a0 50%,
-    #19ff9c 75%,
-    #ff8a70 100%
-  );
-  background-size: 200% auto;
-  color: transparent;
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: shine 20s linear infinite;
+  color: var(--color-text-default);
   display: inline-block;
   font-size: 3.5rem;
   font-weight: 700;
   line-height: 1.1;
   margin-bottom: 20px;
   font-family: var(--font-heading);
-}
-
-@keyframes shine {
-  to {
-    background-position: 200% center;
-  }
 }
 
 .subtitle {
@@ -68,7 +48,7 @@
   left: 0;
   right: 0;
   height: 2px;
-  background: linear-gradient(90deg, #ff8a70, #7cffeb);
+  background: var(--color-accent);
   border-radius: 1px;
 }
 
@@ -131,15 +111,15 @@ main {
   }
 }
 
-/* Smooth transitions for theme changes */
-* {
-  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+/* Smooth transitions for theme changes - only for specific elements */
+.App,
+.App-header,
+.subtitle,
+.letterboxd-text {
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 /* Dark mode specific adjustments */
-.dark .gradient-text {
-  /* Gradient already works well in dark mode */
-}
 
 .dark .subtitle {
   color: var(--color-text-muted);

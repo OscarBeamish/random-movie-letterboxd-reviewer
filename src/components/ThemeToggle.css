@@ -28,7 +28,14 @@
 }
 
 .toggle-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition: transform 0.3s ease;
+}
+
+.toggle-icon svg {
+  color: #fbbf24 !important; /* Always golden/yellow for visibility */
 }
 
 .theme-toggle:hover .toggle-icon {

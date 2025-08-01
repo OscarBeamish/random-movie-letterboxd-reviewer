@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { Movie } from '../types/Movie';
 import { movieService } from '../services/movieService';
 import MovieCard from './MovieCard';
@@ -18,6 +18,7 @@ const MovieList: React.FC<MovieListProps> = ({ filters = {} }) => {
   const [error, setError] = useState<string | null>(null);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
+  const observer = useRef<IntersectionObserver | null>(null);
 
   const loadMovies = useCallback(async (pageNum: number = 1, resetList: boolean = false) => {
     try {
@@ -49,11 +50,16 @@ const MovieList: React.FC<MovieListProps> = ({ filters = {} }) => {
     loadMovies(1, true);
   }, [loadMovies]);
 
-  const loadMoreMovies = () => {
-    if (!loading && hasMore) {
-      loadMovies(page + 1, false);
-    }
-  };
+  const lastMovieElementRef = useCallback((node: HTMLDivElement | null) => {
+    if (loading) return;
+    if (observer.current) observer.current.disconnect();
+    observer.current = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting && hasMore) {
+        loadMovies(page + 1, false);
+      }
+    });
+    if (node) observer.current.observe(node);
+  }, [loading, hasMore, page, loadMovies]);
 
   if (error) {
     return (
@@ -72,26 +78,19 @@ const MovieList: React.FC<MovieListProps> = ({ filters = {} }) => {
   return (
     <div className="movie-list-container">
       <div className="movie-grid">
-        {movies.map((movie) => (
-          <MovieCard key={`${movie.id}-${page}`} movie={movie} />
-        ))}
+        {movies.map((movie, index) => {
+          if (movies.length === index + 1) {
+            return <MovieCard ref={lastMovieElementRef} key={`${movie.id}-${index}`} movie={movie} />;
+          } else {
+            return <MovieCard key={`${movie.id}-${index}`} movie={movie} />;
+          }
+        })}
       </div>
 
       {loading && (
         <div className="loading-container">
           <div className="loading-spinner"></div>
           <p>Loading amazing movies...</p>
-        </div>
-      )}
-
-      {!loading && hasMore && movies.length > 0 && (
-        <div className="load-more-container">
-          <button 
-            className="load-more-button" 
-            onClick={loadMoreMovies}
-          >
-            Load More Movies
-          </button>
         </div>
       )}
 

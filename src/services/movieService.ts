@@ -19,17 +19,26 @@ export const movieService = {
     page?: number;
     year?: number;
     genre?: number;
-    sort_by?: string;
+    sortBy?: string;
   } = {}): Promise<TMDBResponse> {
-    const { page = 1, year, genre, sort_by = 'popularity.desc' } = params;
+    const { page = 1, year, genre, sortBy = 'random' } = params;
+    
+    let actualSortBy = sortBy;
+    let actualPage = page;
+    
+    // Handle random sorting by using a random page with popularity sort
+    if (sortBy === 'random') {
+      actualSortBy = 'popularity.desc';
+      actualPage = page === 1 ? Math.floor(Math.random() * 500) + 1 : page;
+    }
     
     const queryParams = new URLSearchParams({
       api_key: TMDB_API_KEY,
-      page: page.toString(),
-      sort_by,
+      page: actualPage.toString(),
+      sort_by: actualSortBy,
     });
 
-    if (year) queryParams.append('year', year.toString());
+    if (year) queryParams.append('primary_release_year', year.toString());
     if (genre) queryParams.append('with_genres', genre.toString());
 
     const response = await fetch(
@@ -63,9 +72,12 @@ export const movieService = {
       .replace(/[^a-z0-9\s-]/g, '')
       .replace(/\s+/g, '-')
       .replace(/-+/g, '-')
+      .replace(/^-+|-+$/g, '')
       .trim();
     
-    const year = new Date(movie.release_date).getFullYear();
-    return `https://letterboxd.com/film/${cleanTitle}-${year}/`;
+    // Most movies on Letterboxd don't have year suffixes
+    // Only movies with the same title use year to differentiate
+    // Add /review/ to go directly to the review page
+    return `https://letterboxd.com/film/${cleanTitle}/review/`;
   }
 };

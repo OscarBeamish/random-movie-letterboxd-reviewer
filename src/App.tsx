@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import MovieList from './components/MovieList';
 import MovieFilters from './components/MovieFilters';
 import BackgroundAnimation from './components/BackgroundAnimation';
 import ThemeToggle from './components/ThemeToggle';
+import RefreshButton from './components/RefreshButton';
 import './App.css';
 
 function App() {
@@ -12,13 +13,14 @@ function App() {
     sortBy?: string;
   }>({});
 
-  const handleFiltersChange = (newFilters: typeof filters) => {
+  const handleFiltersChange = useCallback((newFilters: typeof filters) => {
     setFilters(newFilters);
-  };
+  }, []);
 
   return (
     <div className="App">
       <BackgroundAnimation />
+      <RefreshButton />
       <ThemeToggle />
       
       <header className="App-header">

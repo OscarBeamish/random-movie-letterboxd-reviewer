@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import LightModeIcon from '@mui/icons-material/LightMode';
+import DarkModeIcon from '@mui/icons-material/DarkMode';
 import './ThemeToggle.css';
 
 const ThemeToggle: React.FC = () => {
@@ -38,7 +40,7 @@ const ThemeToggle: React.FC = () => {
       title={`Switch to ${isDark ? 'light' : 'dark'} mode`}
     >
       <div className="toggle-icon">
-        {isDark ? '☀️' : '🌙'}
+        {isDark ? <LightModeIcon fontSize="small" /> : <DarkModeIcon fontSize="small" />}
       </div>
     </button>
   );

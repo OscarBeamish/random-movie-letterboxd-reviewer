@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, forwardRef } from 'react';
 import { Movie } from '../types/Movie';
 import { movieService } from '../services/movieService';
+import MovieIcon from '@mui/icons-material/Movie';
+import StarIcon from '@mui/icons-material/Star';
 import './MovieCard.css';
 
 interface MovieCardProps {
   movie: Movie;
 }
 
-const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
+const MovieCard = forwardRef<HTMLDivElement, MovieCardProps>(({ movie }, ref) => {
   const [imageError, setImageError] = useState(false);
 
   const handleClick = () => {
@@ -20,7 +22,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
   };
 
   return (
-    <div className="movie-card" onClick={handleClick}>
+    <div ref={ref} className="movie-card" onClick={handleClick}>
       <div className="movie-poster">
         {!imageError && movie.poster_path ? (
           <img
@@ -31,13 +33,14 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
           />
         ) : (
           <div className="poster-placeholder">
-            <div className="placeholder-icon">🎬</div>
+            <div className="placeholder-icon"><MovieIcon fontSize="large" /></div>
             <div className="placeholder-text">No Poster</div>
           </div>
         )}
         <div className="movie-overlay">
           <div className="movie-rating">
-            ⭐ {movie.vote_average.toFixed(1)}
+            <StarIcon fontSize="small" style={{ marginRight: '4px' }} />
+            {movie.vote_average.toFixed(1)}
           </div>
         </div>
       </div>
@@ -49,6 +52,8 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
       </div>
     </div>
   );
-};
+});
+
+MovieCard.displayName = 'MovieCard';
 
 export default MovieCard;
