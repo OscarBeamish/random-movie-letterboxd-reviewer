@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Genre } from '../types/Movie';
 import { movieService } from '../services/movieService';
-import SearchIcon from '@mui/icons-material/Search';
 import './MovieFilters.css';
 
 interface MovieFiltersProps {
